@@ -1,27 +1,34 @@
 package com.muhikira.taxi24.entity;
 
+import jakarta.persistence.Entity;
+
+import java.util.Set;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="driver")
+@Table(name = "driver")
 public class Driver {
 
     // define fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "driver_id")
     private Long id;
     private String firstName;
     private String lastName;
     private String status;
 
 
-    // define constructors
+    @OneToMany(mappedBy = "driver")
+    private Set<Rider> riders;
+
+     // define constructors
 
     public Driver() {
     }
 
-    public Driver( String firstName, String lastName, String status) {
+    public Driver(String firstName, String lastName, String status ) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -59,6 +66,14 @@ public class Driver {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Set<Rider> getRiders() {
+        return riders;
+    }
+
+    public void setRiders(Set<Rider> riders) {
+        this.riders = riders;
     }
 
     // define toString

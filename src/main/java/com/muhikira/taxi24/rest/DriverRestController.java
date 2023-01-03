@@ -1,32 +1,40 @@
 package com.muhikira.taxi24.rest;
 
 import com.muhikira.taxi24.entity.Driver;
+import com.muhikira.taxi24.entity.Rider;
+import com.muhikira.taxi24.service.ServiceDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
-import com.muhikira.taxi24.service.DriverService;
+import com.muhikira.taxi24.repository.DriverService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/driver")
+@RequestMapping("/")
 public class DriverRestController {
-    @Autowired
-    private DriverService driverService;
 
-    public DriverRestController(DriverService theDriverService){
+    private final DriverService driverService;
+    private final ServiceDriver serviceDriver;
+
+
+    public DriverRestController(DriverService theDriverService, ServiceDriver serviceDriver){
         this.driverService = theDriverService;
+        this.serviceDriver = serviceDriver;
 
     }
 
+
     // expose "/drivers" and return list of employees
-    @GetMapping("/drivers")
+    @GetMapping("/all")
     public List<Driver> findAll() {
         return driverService.getAll();
     }
 
     // add mapping for GET /drivers/{driverId}
 
-    @GetMapping("/drivers/{driverId}")
+    @GetMapping("/driver/{driverId}")
     public Driver getEmployee(@PathVariable long driverId) {
 
         Driver theDriver  = driverService.findById(driverId);
@@ -52,15 +60,21 @@ public class DriverRestController {
 
     // add mapping for PUT /drivers - update existing drivers
 
-    @PutMapping("/drivers/{driverId}")
+    @PutMapping("/driver/{driverId}")
     public Driver updateDriver(@PathVariable Long driverId,@RequestBody Driver theDriver) {
 
         return driverService.update(driverId,theDriver);
     }
+@PostMapping("/assignRiderToDriver")
+    public void assignRiderToDriver(@RequestParam Long driverId, @RequestParam Long riderId) {
+     serviceDriver.assignRiderToDriver(driverId, riderId);
+
+    }
+
 
     // add mapping for DELETE /drivers/{driverId} - delete driver
 
-    @DeleteMapping("/drivers/{driverId}")
+    @DeleteMapping("/driver/{driverId}")
     public String deleteDriver(@PathVariable Long driverId) {
 
         Driver tempDriver = driverService.findById(driverId);
