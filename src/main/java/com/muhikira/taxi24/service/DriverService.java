@@ -1,4 +1,4 @@
-package com.muhikira.taxi24.repository;
+package com.muhikira.taxi24.service;
 
 import com.muhikira.taxi24.entity.Driver;
 

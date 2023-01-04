@@ -17,22 +17,20 @@ public class Driver {
     private Long id;
     private String firstName;
     private String lastName;
-    private String status;
+    private Status status;
+    private double currentLocation;
 
-
-    @OneToMany(mappedBy = "driver")
-    private Set<Rider> riders;
-
-     // define constructors
+    // define constructors
 
     public Driver() {
     }
 
-    public Driver(String firstName, String lastName, String status ) {
-
+    public Driver(String firstName, String lastName, Status status, double currentLocation) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
+        this.currentLocation = currentLocation;
+
     }
 //define getter and setters
 
@@ -60,21 +58,22 @@ public class Driver {
         this.lastName = lastName;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public Set<Rider> getRiders() {
-        return riders;
+    public double getCurrentLocation() {
+        return currentLocation;
     }
 
-    public void setRiders(Set<Rider> riders) {
-        this.riders = riders;
+    public void setCurrentLocation(double currentLocation) {
+        this.currentLocation = currentLocation;
     }
+
 
     // define toString
 
@@ -86,6 +85,7 @@ public class Driver {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", status='" + status + '\'' +
+                ", currentLocation=" + currentLocation +
                 '}';
     }
 }

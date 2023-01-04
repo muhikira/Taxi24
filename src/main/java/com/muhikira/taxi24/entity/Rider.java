@@ -17,16 +17,8 @@ public class Rider {
     private String lastName;
 
     private String location;
-    @ManyToOne
-    @JoinColumn(name = "driver_id")
-    private Driver driver;
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+
 
 
     // define constructors
@@ -65,13 +57,11 @@ public class Rider {
     public void setLocation(String location) {
         this.location = location;
     }
-
-    public Driver getDriver() {
-        return driver;
+    public Long getId() {
+        return id;
     }
-
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    public void setId(Long id) {
+        this.id = id;
     }
 
 

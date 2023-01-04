@@ -1,28 +1,20 @@
 package com.muhikira.taxi24.rest;
 
 import com.muhikira.taxi24.entity.Driver;
-import com.muhikira.taxi24.entity.Rider;
-import com.muhikira.taxi24.service.ServiceDriver;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
-import com.muhikira.taxi24.repository.DriverService;
+import com.muhikira.taxi24.service.DriverService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+//@RequestMapping("/driver")
 public class DriverRestController {
 
     private final DriverService driverService;
-    private final ServiceDriver serviceDriver;
 
 
-    public DriverRestController(DriverService theDriverService, ServiceDriver serviceDriver){
+    public DriverRestController(DriverService theDriverService){
         this.driverService = theDriverService;
-        this.serviceDriver = serviceDriver;
-
     }
 
 
@@ -65,12 +57,6 @@ public class DriverRestController {
 
         return driverService.update(driverId,theDriver);
     }
-@PostMapping("/assignRiderToDriver")
-    public void assignRiderToDriver(@RequestParam Long driverId, @RequestParam Long riderId) {
-     serviceDriver.assignRiderToDriver(driverId, riderId);
-
-    }
-
 
     // add mapping for DELETE /drivers/{driverId} - delete driver
 

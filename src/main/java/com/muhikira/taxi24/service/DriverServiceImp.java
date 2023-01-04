@@ -1,7 +1,6 @@
 package com.muhikira.taxi24.service;
 
 import com.muhikira.taxi24.entity.Driver;
-import com.muhikira.taxi24.repository.DriverService;
 import org.springframework.stereotype.Service;
 import com.muhikira.taxi24.repository.DriverRepository;
 
@@ -13,6 +12,7 @@ public class DriverServiceImp implements DriverService {
     private DriverRepository driverRepository;
 
     public  DriverServiceImp(DriverRepository theDriverRepository){
+
         this.driverRepository = theDriverRepository;
     }
     @Override
